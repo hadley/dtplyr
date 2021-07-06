@@ -81,6 +81,8 @@
   * `replace_na()` (@markfairbanks, #202)
   
   * `nest()` (@mgirlich, #251)
+  
+  * `separate()` (@markfairbanks, #269)
 
 # dtplyr 1.1.0
 

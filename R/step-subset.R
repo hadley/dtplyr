@@ -6,7 +6,8 @@ step_subset <- function(parent,
                         i = NULL,
                         j = NULL,
                         on = character(),
-                        allow_cartesian = NULL
+                        allow_cartesian = NULL,
+                        needs_copy = FALSE
 ) {
 
   stopifnot(is_step(parent))
@@ -25,6 +26,7 @@ step_subset <- function(parent,
     on = on,
     allow_cartesian = allow_cartesian,
     implicit_copy = !is.null(i) || !is.null(j),
+    needs_copy = needs_copy || parent$needs_copy,
     class = "dtplyr_step_subset"
   )
 }
