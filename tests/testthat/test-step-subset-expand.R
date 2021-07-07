@@ -6,7 +6,7 @@ test_that("expand completes all values", {
 
   expect_equal(
     show_query(step),
-    expr(unique(DT)[CJ(x, y, unique = TRUE), on = .(x, y)])
+    expr(DT[, CJ(x, y, unique = TRUE)])
   )
   expect_equal(step$vars, c("x", "y"))
   expect_equal(nrow(out), 4)
@@ -29,9 +29,10 @@ test_that("works with unnamed vectors", {
 
   expect_equal(
     show_query(step),
-    expr(unique(DT[, .(x = x, V2 = 1:2)])[CJ(x, V2, unique = TRUE), on = .(x, V2)])
+    # expr(unique(DT[, .(x = x, V2 = 1:2)])[CJ(x, V2, unique = TRUE), on = .(x, V2)])
+    expr(DT[, CJ(x, 1:2, unique = TRUE)][, .(x, `1:2` = V2)])
   )
-  expect_equal(step$vars, c("x", "V2"))
+  expect_equal(step$vars, c("x", "1:2"))
   expect_equal(nrow(out), 4)
 })
 
@@ -43,7 +44,8 @@ test_that("works with named vectors", {
 
   expect_equal(
     show_query(step),
-    expr(unique(DT[, .(x = x, val = 1:2)])[CJ(x, val, unique = TRUE), on = .(x, val)])
+    # expr(unique(DT[, .(x = x, val = 1:2)])[CJ(x, val, unique = TRUE), on = .(x, val)])
+    expr(DT[, CJ(x, val = 1:2, unique = TRUE)])
   )
   expect_equal(step$vars, c("x", "val"))
   expect_equal(nrow(out), 4)
